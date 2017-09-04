@@ -12,9 +12,15 @@ struct Material {
   double width; //aka inner diameter
 };
 
-struct Material materials[] {
+#define BELT_LEN 3
+#define BIN_CNT 1
+#define BIN_OFF BELT_LEN - BIN_CNT
+
+struct Material bins[BIN_CNT] {
   {MaterialType::Bolt, 1, 3.0/8.0}
 };
+
+struct Material belt[BELT_LEN];
 
 void setup() {
 
