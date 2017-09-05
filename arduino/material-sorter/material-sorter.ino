@@ -52,7 +52,9 @@ void rotateBelt() {
 }
 
 struct Material getImageMaterial() {
+  struct Material material;
   //TODO get material data from Pi
+  return material;
 }
 
 void addMaterial(struct Material material) {
