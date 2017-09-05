@@ -20,8 +20,6 @@ struct Material {
 #define BIN_OFF BELT_LEN - BIN_CNT
 //offset for DIO pins for the bin kickers - i.e. bin 2's kicker is on DIO 2+BIN_DIO
 #define BIN_DIO 3
-//DIO pin for beam break sensor - tells us if there are more materials to sort
-#define BB_DIO 2
 
 struct Material bins[BIN_CNT] {
   {MaterialType::Bolt, 1, 3.0/8.0}
@@ -35,9 +33,29 @@ void setup() {
 }
 
 void loop() {
-  //TODO check beam break sensor to see if new piece is available at Belt[-1]
-  //TODO rotate belt
-  //TODO request image from Pi
-  //TODO shift stack & add new
-  //TODO push proper materials
+  rotateBelt(1);
+  addMaterial(getImageMaterial());
+  pushMaterials();
+  delay(100);
 }
+
+void rotateBelt(int counts) {
+  //TODO rotate belt
+}
+
+struct Material getImageMaterial() {
+  //TODO get material data from Pi
+}
+
+void addMaterial(struct Material material) {
+  //TODO shift stack, add new
+}
+
+void pushMaterials() {
+  //TODO check each material, push if necessary
+}
+
+void pushBin(int number) {
+  //TODO push that bin kicker
+}
+
