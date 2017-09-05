@@ -27,6 +27,8 @@ struct Material {
 #define BELT_DIO 2
 //time to run the belt motor to increment it by one bin, in ms
 #define BELT_TIME 250
+//time to run the kicker motors
+#define PUSH_TIME 250
 
 struct Material bins[BIN_CNT] {
   {MaterialType::Bolt, 1, 3.0/8.0}
@@ -69,12 +71,16 @@ void addMaterial(struct Material material) {
 }
 
 void pushMaterials() {
-  for(int i = 0; i < BELT_LEN; i++) {
-
+  //for each bin, if belt at that position holds the correct material, push it
+  for(int i = 0; i < BIN_CNT; i++) {
+    if(bins[i] == belt[i + BIN_OFF]) {
+      pushBin(i);
+    }
   }
-  //TODO check each material, push if necessary
 }
 
 void pushBin(int number) {
-  //TODO push that bin kicker
+  digitalWrite(number + BIN_DIO, HIGH);
+  delay(PUSH_TIME);
+  digitalWrite(number + BIN_DIO, LOW);
 }
