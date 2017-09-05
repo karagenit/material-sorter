@@ -10,6 +10,9 @@ struct Material {
   enum MaterialType type;
   double length;
   double width; //aka inner diameter
+  bool operator==(const Material& other) {
+    return this->type == other.type && this->length == other.length && this->width == other.width;
+  }
 };
 
 //how many sections are on the belt, starting at the image sensor, ending at the end of the belt
@@ -66,6 +69,9 @@ void addMaterial(struct Material material) {
 }
 
 void pushMaterials() {
+  for(int i = 0; i < BELT_LEN; i++) {
+
+  }
   //TODO check each material, push if necessary
 }
 
