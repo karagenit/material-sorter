@@ -58,7 +58,11 @@ struct Material getImageMaterial() {
 }
 
 void addMaterial(struct Material material) {
-  //TODO shift stack, add new
+  //starting at last element, replace with preceeding element (shift each forward)
+  for(int i = BELT_LEN - 1; i > 0; i--) {
+    belt[i] = belt[i-1];
+  }
+  belt[0] = material;
 }
 
 void pushMaterials() {
