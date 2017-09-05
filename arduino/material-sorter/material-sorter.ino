@@ -20,6 +20,10 @@ struct Material {
 #define BIN_OFF BELT_LEN - BIN_CNT
 //offset for DIO pins for the bin kickers - i.e. bin 2's kicker is on DIO 2+BIN_DIO
 #define BIN_DIO 3
+//belt driver motor
+#define BELT_DIO 2
+//time to run the belt motor to increment it by one bin, in ms
+#define BELT_TIME 250
 
 struct Material bins[BIN_CNT] {
   {MaterialType::Bolt, 1, 3.0/8.0}
@@ -30,17 +34,21 @@ struct Material belt[BELT_LEN];
 void setup() {
   //TODO serial communication init
   //TODO verify connection with Pi
+  pinMode(BELT_DIO, OUTPUT);
+  //TODO config each bin io
 }
 
 void loop() {
-  rotateBelt(1);
+  rotateBelt();
   addMaterial(getImageMaterial());
   pushMaterials();
   delay(100);
 }
 
-void rotateBelt(int counts) {
-  //TODO rotate belt
+void rotateBelt() {
+  digitalWrite(BELT_DIO, HIGH);
+  delay(BELT_TIME);
+  digitalWrite(BELT_DIO, LOW);
 }
 
 struct Material getImageMaterial() {
@@ -58,4 +66,3 @@ void pushMaterials() {
 void pushBin(int number) {
   //TODO push that bin kicker
 }
-
