@@ -11,10 +11,10 @@ while run:
     img = vision.read_image()
     cv.imshow('Original', img)
 
-    img = vision.filter_image(img)
-    cv.imshow('Filtered', img)
+    filtered = vision.filter_image(img)
+    cv.imshow('Filtered', filtered)
 
-    info = vision.process_image(img)
+    info = vision.process_image(img, filtered)
 
     print("Image Processed")
     print("Length:", info.length, "inches.")

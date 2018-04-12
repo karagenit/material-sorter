@@ -18,5 +18,13 @@ def filter_image(original):
     return cv.inRange(original, lower, upper)
 
 
-def process_image(img):
+def process_image(original, filtered):
+    edges = cv.Canny(filtered, 100, 200)
+    (_, contours, _) = cv.findContours(edges, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
+    print("Contour count:", len(contours))
+
+    drawnImg = original.copy()
+    cv.drawContours(drawnImg, contours, -1, (0,255,0), 3)
+    cv.imshow("Edges", drawnImg)
+
     return Bolt(2, 0.25, 20)
