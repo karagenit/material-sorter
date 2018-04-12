@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-from arduino import print_hello
+import arduino
 
 run = True
 while run:
-    print_hello()
+    arduino.print_hello()
     # await trigger
     # grab image
     # process image
