@@ -4,8 +4,8 @@ import arduino
 
 run = True
 while run:
-    arduino.print_hello()
-    # await trigger
+    arduino.await_signal()
     # grab image
     # process image
     # print results
+    print("Image Processed")
