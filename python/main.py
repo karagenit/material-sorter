@@ -14,7 +14,10 @@ while run:
     img = vision.filter_image(img)
     cv.imshow('Filtered', img)
 
+    info = vision.process_image(img)
+
     print("Image Processed")
+    print("Length:", info.length, "inches.")
     cv.waitKey(0)
 
     cv.destroyAllWindows()

@@ -1,6 +1,12 @@
 import numpy as np
 import cv2 as cv
 
+class Bolt:
+    def __init__(self, length, diameter, threads):
+        self.length = length
+        self.diameter = diameter
+        self.threads = threads
+
 # Reads an image from either a test file or the picamera
 def read_image():
     return cv.imread('opencv.jpg')
@@ -12,5 +18,5 @@ def filter_image(original):
     return cv.inRange(original, lower, upper)
 
 
-def process_image():
-    return
+def process_image(img):
+    return Bolt(2, 0.25, 20)
