@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from io import print_hello
+from arduino import print_hello
 
 run = True
 while run:
