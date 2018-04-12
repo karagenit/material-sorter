@@ -15,7 +15,12 @@ def filter_image(original):
     #img = cv.cvtColor(img, cv.COLOR_RGB2HSV)
     lower = np.array([100, 0, 0])
     upper = np.array([255, 100, 100])
-    return cv.inRange(original, lower, upper)
+    bw = cv.inRange(original, lower, upper)
+
+    kernel = np.ones((3,3), np.uint8)
+    eroded = cv.erode(bw, kernel, iterations = 1)
+
+    return eroded
 
 
 def process_image(original, filtered):
