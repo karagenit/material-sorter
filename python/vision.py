@@ -22,6 +22,9 @@ class Bolt:
         self.diameter = diameter
         self.threads = threads
 
+    def __eq__(self, other):
+        return self.length == other.length and self.diameter == other.diameter and self.threads == other.threads
+
 # Reads an image from either a test file or the picamera
 def read_image():
     return cv.imread('bolt.jpg')
