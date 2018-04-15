@@ -51,8 +51,19 @@ def process_image(original, filtered):
     (_, contours, _) = cv.findContours(edges, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
     print("Contour count:", len(contours))
 
+    # TODO: choose 'ideal' contour
+    primaryContour = contours[0]
+
+    boundingRect = cv.minAreaRect(primaryContour)
+
+    # DEBUG
     drawnImg = original.copy()
     cv.drawContours(drawnImg, contours, -1, (0,255,0), 2)
+
+    box = cv.boxPoints(boundingRect)
+    box = np.int0(box)
+    cv.drawContours(drawnImg,[box],0,(0,0,255),2)
+
     cv.imshow("Edges", drawnImg)
 
     return Bolt(2, 0.25, 20)
