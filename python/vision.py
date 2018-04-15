@@ -11,10 +11,10 @@ PPI = 160
 
 # This determines how precisely we should try to sort/categorize bolts (e.g. by 1/4" lengths)
 #   Higher precision results in less accuracy (higher rate of false sorting).
-LENGTHS = [ 1, 1.25, 1.5, 1.75, 2 ]
+LENGTHS = np.arange(1, 4, 0.25)
 
 # Just #10 and 1/4"
-DIAMETERS = [ 0.19, 0.25 ]
+DIAMETERS = np.array([ 0.19, 0.25 ])
 
 class Bolt:
     def __init__(self, length, diameter, threads):
@@ -56,8 +56,8 @@ def process_image(original, filtered):
     boundingRect = cv.minAreaRect(primaryContour)
 
     # Length is the longer of the two
-    length = max(boundingRect[1][0], boundingRect[1][1])
-    width  = min(boundingRect[1][0], boundingRect[1][1])
+    length = pixel_to_inch(max(boundingRect[1][0], boundingRect[1][1]), LENGTHS)
+    width  = pixel_to_inch(min(boundingRect[1][0], boundingRect[1][1]), DIAMETERS)
 
     # DEBUG
     drawnImg = original.copy()
@@ -68,4 +68,10 @@ def process_image(original, filtered):
     cv.imshow("Edges", drawnImg)
 
     # We hardcode 1 thread per inch until we can vision process that
-    return Bolt(length/PPI, width/PPI, 1)
+    return Bolt(length, width, 1)
+
+# Converts a pixel len/width to inches and finds the nearest in the array
+def pixel_to_inch(value, array):
+    inches = value / PPI
+    idx = (np.abs(array-inches)).argmin()
+    return array[idx]
