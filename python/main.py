@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-
 import arduino
 import vision
 import cv2 as cv
+
+arduino.init()
 
 run = True
 while run:
@@ -22,3 +23,5 @@ while run:
     cv.waitKey(0)
     cv.destroyAllWindows()
     run = False
+
+arduino.close()
