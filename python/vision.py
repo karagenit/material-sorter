@@ -24,13 +24,12 @@ class Bolt:
 
 # Reads an image from either a test file or the picamera
 def read_image():
-    return cv.imread('opencv.jpg')
+    return cv.imread('bolt.jpg')
 
-# TODO: filter to keep everything not green?
 def filter_image(original):
     #img = cv.cvtColor(img, cv.COLOR_RGB2HSV)
-    lower = np.array([100, 0, 0])
-    upper = np.array([255, 100, 100])
+    lower = np.array([0, 0, 0])
+    upper = np.array([240, 240, 240])
     bw = cv.inRange(original, lower, upper)
 
     kernel = np.ones((3,3), np.uint8)
