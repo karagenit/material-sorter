@@ -32,11 +32,19 @@ def filter_image(original):
     upper = np.array([240, 240, 240])
     bw = cv.inRange(original, lower, upper)
 
+    # Removes random one-pixel noise
     kernel = np.ones((3,3), np.uint8)
     eroded = cv.erode(bw, kernel, iterations = 1)
 
-    return eroded
+    # Fills in gaps in main image
+    kernel = np.ones((8,8), np.uint8)
+    dilated = cv.dilate(eroded, kernel, iterations = 1)
 
+    # Gets us back to original size ish for length calculations
+    kernel = np.ones((5,5), np.uint8)
+    final = cv.erode(dilated, kernel, iterations = 1)
+
+    return final
 
 def process_image(original, filtered):
     edges = cv.Canny(filtered, 100, 200)
@@ -44,7 +52,7 @@ def process_image(original, filtered):
     print("Contour count:", len(contours))
 
     drawnImg = original.copy()
-    cv.drawContours(drawnImg, contours, -1, (0,255,0), 3)
+    cv.drawContours(drawnImg, contours, -1, (0,255,0), 2)
     cv.imshow("Edges", drawnImg)
 
     return Bolt(2, 0.25, 20)
