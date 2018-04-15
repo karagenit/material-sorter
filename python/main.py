@@ -17,8 +17,8 @@ while run:
     info = vision.process_image(img, filtered)
 
     print("Image Processed")
-    print("Length:", info.length, "inches.")
-    cv.waitKey(0)
+    arduino.send(info)
 
+    cv.waitKey(0)
     cv.destroyAllWindows()
     run = False
