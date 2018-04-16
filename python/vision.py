@@ -27,7 +27,7 @@ class Bolt:
 
 # Reads an image from either a test file or the picamera
 def read_image():
-    return cv.imread('bolt.jpg')
+    return cv.imread('images/bolt.jpg')
 
 def filter_image(original):
     #img = cv.cvtColor(img, cv.COLOR_RGB2HSV)
