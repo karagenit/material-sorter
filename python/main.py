@@ -1,7 +1,17 @@
 #!/usr/bin/env python3
+
+import sys
+import cv2 as cv
+
+testMode = len(sys.argv) > 1 and sys.argv[1] == "-t"
+
+if(testMode):
+    import test_camera as camera
+else:
+    import camera
+
 import arduino
 import vision
-import cv2 as cv
 
 arduino.init()
 
@@ -9,7 +19,7 @@ run = True
 while run:
     arduino.await_signal()
 
-    img = vision.read_image()
+    img = camera.read()
     cv.imshow('Original', img)
 
     filtered = vision.filter_image(img)

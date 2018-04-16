@@ -1,0 +1,3 @@
+def read():
+    # TODO
+    return
