@@ -10,7 +10,8 @@ if(testMode):
 else:
     import camera
 
-import arduino
+#import arduino
+import test_arduino as arduino
 import vision
 
 arduino.init()

@@ -1,17 +1,9 @@
 import serial
 import time
 
-serialPort = 0
-
-# List of what each bin contains. As we find new bolts, we allocate new bins for them.
-#   Obviously, the physical device has finite bins, but the arduino handles having the
-#   "overflow" bin. Though, because we send bytes, we have an effective limit of 256.
 bins = []
 
 def init():
-    serialPort = serial.Serial("/dev/ttyACM0", 9600)
-    time.sleep(0.25)
-    # TODO: handshake byte?
     return
 
 # Wait for a serial signal from the arduino which
@@ -26,7 +18,6 @@ def send(info):
 
     binIndex = find_or_insert(info)
 
-    serial.write(bytes([binIndex]))
     return
 
 # Finds an existing bin for this bolt, or allocates a new one. Returns the bin index.
@@ -36,5 +27,4 @@ def find_or_insert(bolt):
     return bins.index(bolt)
 
 def close():
-    serialPort.close()
     return
