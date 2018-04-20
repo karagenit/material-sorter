@@ -11,7 +11,7 @@ PPI = 550
 
 # This determines how precisely we should try to sort/categorize bolts (e.g. by 1/4" lengths)
 #   Higher precision results in less accuracy (higher rate of false sorting).
-LENGTHS = np.arange(0.25, 4, 0.25)
+LENGTHS = np.arange(0.5, 4, 0.5)
 
 # Just #10 and 1/4"
 DIAMETERS = np.array([ 0.19, 0.25 ])
