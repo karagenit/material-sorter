@@ -5,8 +5,8 @@ import cv2 as cv
 
 import camera
 #import test_camera as camera
-#import arduino
-import test_arduino as arduino
+import arduino
+#import test_arduino as arduino
 import vision
 
 arduino.init()
@@ -17,18 +17,18 @@ while run:
     arduino.await_signal()
 
     img = camera.read()
-    cv.imshow('Original', img)
+#   cv.imshow('Original', img)
 
     filtered = vision.filter_image(img)
-    cv.imshow('Filtered', filtered)
+#   cv.imshow('Filtered', filtered)
 
     info = vision.process_image(img, filtered)
 
     print("Image Processed")
     arduino.send(info)
 
-    cv.waitKey(0)
-    cv.destroyAllWindows()
+#   cv.waitKey(0)
+#   cv.destroyAllWindows()
     run = False
 
 arduino.close()
