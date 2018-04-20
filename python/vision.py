@@ -7,7 +7,7 @@ import cv2 as cv
 #   held 6 inches away from the table with a 90 degree horizontal FOV. (90 degree FOV @6" gives
 #   12" across camera horizontally, so 1920/12). Not sure how this will handle bolts not facing
 #   horizontally.
-PPI = 160
+PPI = 1440/3
 
 # This determines how precisely we should try to sort/categorize bolts (e.g. by 1/4" lengths)
 #   Higher precision results in less accuracy (higher rate of false sorting).
@@ -28,7 +28,7 @@ class Bolt:
 def filter_image(original):
     #img = cv.cvtColor(img, cv.COLOR_RGB2HSV)
     lower = np.array([0, 0, 0])
-    upper = np.array([240, 240, 240])
+    upper = np.array([75, 75, 75])
     bw = cv.inRange(original, lower, upper)
 
     # Removes random one-pixel noise
@@ -49,6 +49,8 @@ def process_image(original, filtered):
     edges = cv.Canny(filtered, 100, 200)
     (_, contours, _) = cv.findContours(edges, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
 
+    if len(contours) < 1:
+        return Bolt(0, 0, 0)
     # TODO: choose 'ideal' contour
     primaryContour = contours[0]
     # Gives us a tuple: ((center x,y), (width, height), rotationAngle)
