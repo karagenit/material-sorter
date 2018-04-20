@@ -14,23 +14,24 @@ camera.init()
 
 print("Libraries Loaded.")
 
-run = True
-while run:
-    arduino.await_signal()
+try:
+    while True:
+        arduino.await_signal()
 
-    img = camera.read()
-#   cv.imshow('Original', img)
+        img = camera.read()
+    #   cv.imshow('Original', img)
 
-    filtered = vision.filter_image(img)
-#   cv.imshow('Filtered', filtered)
+        filtered = vision.filter_image(img)
+    #   cv.imshow('Filtered', filtered)
 
-    info = vision.process_image(img, filtered)
+        info = vision.process_image(img, filtered)
 
-    print("Image Processed")
-    arduino.send(info)
+        print("Image Processed")
+        arduino.send(info)
 
-#   cv.waitKey(0)
-#   cv.destroyAllWindows()
-#   run = False
-
-arduino.close()
+    #   cv.waitKey(0)
+    #   cv.destroyAllWindows()
+except (KeyboardInterrupt, SystemExit):
+    print("Exiting...")
+finally:
+    arduino.close()

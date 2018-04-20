@@ -59,7 +59,6 @@ def process_image(original, filtered):
     # find best rect
     for contour in contours:
         rect = cv.minAreaRect(contour)
-        print(rect)
         if rect[1][0] > boundingRect[1][0]:
             boundingRect = rect
 
