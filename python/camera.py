@@ -10,6 +10,7 @@ def init():
     global camera
     global rawCapture
     camera = PiCamera()
+    camera.resolution = (1920, 1080)
     rawCapture = PiRGBArray(camera)
     time.sleep(0.1)
     return
