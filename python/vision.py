@@ -7,7 +7,7 @@ import cv2 as cv
 #   held 6 inches away from the table with a 90 degree horizontal FOV. (90 degree FOV @6" gives
 #   12" across camera horizontally, so 1920/12). Not sure how this will handle bolts not facing
 #   horizontally.
-PPI = 1440/3
+PPI = 550
 
 # This determines how precisely we should try to sort/categorize bolts (e.g. by 1/4" lengths)
 #   Higher precision results in less accuracy (higher rate of false sorting).
@@ -68,12 +68,12 @@ def process_image(original, filtered):
     width  = pixel_to_inch(min(boundingRect[1][0], boundingRect[1][1]), DIAMETERS)
 
     # DEBUG
-    drawnImg = original.copy()
-    cv.drawContours(drawnImg, contours, -1, (0,255,0), 2)
-    box = cv.boxPoints(boundingRect)
-    box = np.int0(box)
-    cv.drawContours(drawnImg,[box],0,(0,0,255),2)
-    cv.imshow("Edges", drawnImg)
+#   drawnImg = original.copy()
+#   cv.drawContours(drawnImg, contours, -1, (0,255,0), 2)
+#   box = cv.boxPoints(boundingRect)
+#   box = np.int0(box)
+#   cv.drawContours(drawnImg,[box],0,(0,0,255),2)
+#   cv.imshow("Edges", drawnImg)
 
     # We hardcode 1 thread per inch until we can vision process that
     return Bolt(length, width, 1)
