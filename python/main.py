@@ -26,12 +26,12 @@ try:
 
         info = vision.process_image(img, filtered)
 
-        print("Image Processed")
+        print("Image Processed.")
         arduino.send(info)
 
     #   cv.waitKey(0)
-    #   cv.destroyAllWindows()
 except (KeyboardInterrupt, SystemExit):
     print("Exiting...")
 finally:
     arduino.close()
+    #cv.destroyAllWindows()
