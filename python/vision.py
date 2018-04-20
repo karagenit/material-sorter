@@ -11,7 +11,7 @@ PPI = 1440/3
 
 # This determines how precisely we should try to sort/categorize bolts (e.g. by 1/4" lengths)
 #   Higher precision results in less accuracy (higher rate of false sorting).
-LENGTHS = np.arange(1, 4, 0.25)
+LENGTHS = np.arange(0.25, 4, 0.25)
 
 # Just #10 and 1/4"
 DIAMETERS = np.array([ 0.19, 0.25 ])
@@ -51,10 +51,17 @@ def process_image(original, filtered):
 
     if len(contours) < 1:
         return Bolt(0, 0, 0)
-    # TODO: choose 'ideal' contour
+
     primaryContour = contours[0]
     # Gives us a tuple: ((center x,y), (width, height), rotationAngle)
     boundingRect = cv.minAreaRect(primaryContour)
+
+    # find best rect
+    for contour in contours:
+        rect = cv.minAreaRect(contour)
+        print(rect)
+        if rect[1][0] > boundingRect[1][0]:
+            boundingRect = rect
 
     # Length is the longer of the two
     length = pixel_to_inch(max(boundingRect[1][0], boundingRect[1][1]), LENGTHS)
