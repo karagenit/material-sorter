@@ -18,5 +18,6 @@ def init():
 def read():
     global camera
     global rawCapture
+    rawCapture.truncate(0)
     camera.capture(rawCapture, format="bgr")
     return rawCapture.array
