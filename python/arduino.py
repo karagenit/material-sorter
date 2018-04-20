@@ -18,6 +18,8 @@ def init():
 # Wait for a serial signal from the arduino which
 # says it's time to read an image.
 def await_signal():
+    # TODO: await byte
+    input("Press Enter to Process Image...")
     return
 
 def send(info):

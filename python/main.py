@@ -12,6 +12,8 @@ import vision
 arduino.init()
 camera.init()
 
+print("Libraries Loaded.")
+
 run = True
 while run:
     arduino.await_signal()
@@ -29,6 +31,6 @@ while run:
 
 #   cv.waitKey(0)
 #   cv.destroyAllWindows()
-    run = False
+#   run = False
 
 arduino.close()
