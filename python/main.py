@@ -3,18 +3,14 @@
 import sys
 import cv2 as cv
 
-testMode = len(sys.argv) > 1 and sys.argv[1] == "-t"
-
-if(testMode):
-    import test_camera as camera
-else:
-    import camera
-
+import camera
+#import test_camera as camera
 #import arduino
 import test_arduino as arduino
 import vision
 
 arduino.init()
+camera.init()
 
 run = True
 while run:
