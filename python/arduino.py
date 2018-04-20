@@ -9,6 +9,7 @@ serialPort = 0
 bins = []
 
 def init():
+    global serialPort
     serialPort = serial.Serial("/dev/ttyACM0", 9600)
     time.sleep(0.25)
     # TODO: handshake byte?
@@ -20,21 +21,26 @@ def await_signal():
     return
 
 def send(info):
+    global serialPort
     print("Sending serial data...")
     print("Length:", info.length)
     print("Width:", info.diameter)
 
     binIndex = find_or_insert(info)
 
-    serial.write(bytes([binIndex]))
+    print("Bin:", binIndex)
+
+    serialPort.write(bytes([binIndex]))
     return
 
 # Finds an existing bin for this bolt, or allocates a new one. Returns the bin index.
 def find_or_insert(bolt):
+    global bins
     if bolt not in bins:
         bins.append(bolt)
     return bins.index(bolt)
 
 def close():
+    global serialPort
     serialPort.close()
     return
