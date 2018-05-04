@@ -18,10 +18,12 @@ void loop() {
   
   byte bin = Serial.read();
   
-  digitalWrite(LED, HIGH);
-  delay(500);
-  digitalWrite(LED, LOW);
-  delay(500);
+  for (int i = 0; i < bin+1; i++) {
+    digitalWrite(LED, HIGH);
+    delay(500);
+    digitalWrite(LED, LOW);
+    delay(500);
+  }
 }
 
 // Bins start at index 0
