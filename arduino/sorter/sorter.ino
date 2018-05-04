@@ -1,7 +1,10 @@
 #include <Servo.h>
 
 #define BINS 10 // indexes 0..n-2, n-1 is overflow
-#define LED 13
+#define SSDA 8
+#define SSDB 9
+#define SSDC 10
+#define SSDD 11
 #define SERVO 3 //used for positioning chute
 #define SERVO_ANGLE 15
 
@@ -9,7 +12,10 @@ Servo positionServo;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(LED, OUTPUT);
+  pinMode(SSDA, OUTPUT);
+  pinMode(SSDB, OUTPUT);
+  pinMode(SSDC, OUTPUT);
+  pinMode(SSDD, OUTPUT);
   positionServo.attach(SERVO);
 }
 
@@ -18,12 +24,12 @@ void loop() {
   
   byte bin = Serial.read();
   
-  for (int i = 0; i < bin+1; i++) {
-    digitalWrite(LED, HIGH);
-    delay(500);
-    digitalWrite(LED, LOW);
-    delay(500);
-  }
+  //setPosition(bin);
+
+  digitalWrite(SSDA, bin & 0b0001);
+  digitalWrite(SSDB, bin & 0b0010);
+  digitalWrite(SSDC, bin & 0b0100);
+  digitalWrite(SSDD, bin & 0b1000);
 }
 
 // Bins start at index 0
