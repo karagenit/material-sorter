@@ -1,15 +1,19 @@
 #include <Servo.h>
 
 #define BINS 10 // indexes 0..n-2, n-1 is overflow
+
 #define SSDA 8
 #define SSDB 9
 #define SSDC 10
 #define SSDD 11
+
 #define SERVO 5 //used for positioning chute.. max write(5..180)
 #define SERVO_ANGLE_OFF 5
 #define SERVO_ANGLE_INC 15
-#define MOTOR 5 //used for spinning turntable
-#define TURN_TIME 500 // time to run the turntable motor for
+
+#define MOTOR 3 //used for spinning turntable
+#define TURN_TIME 1000 // time to run the turntable motor for
+
 Servo positionServo;
 
 void setup() {
@@ -23,9 +27,6 @@ void setup() {
 }
 
 void loop() {
-  // Position table for next bolt
-  //moveTable();
-
   // Signal Pi to Capture Image
   //Serial.write(0x01);
 
@@ -46,6 +47,9 @@ void loop() {
   digitalWrite(SSDB, bin & 0b0010);
   digitalWrite(SSDC, bin & 0b0100);
   digitalWrite(SSDD, bin & 0b1000);
+
+  // Position table for next bolt - causes DELAY!
+  moveTable();
 }
 
 void moveTable() {
