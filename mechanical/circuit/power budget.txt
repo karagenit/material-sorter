@@ -1,0 +1,8 @@
+Source: 7805 T220 - 1.5 A Continuous, 2.2 A Peak
+
+Uses:
+ATmega328p - 0.02 A
+RPi 2 B (400% CPU) - 0.4 A
+Servo - ???
+393 Motor - 0.15 A Continuous, 3.6 A Peak
+LED - 0.02 A
