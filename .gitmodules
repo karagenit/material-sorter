@@ -1,0 +1,3 @@
+[submodule "mechanical/circuit"]
+	path = mechanical/circuit
+	url = https://github.com/karagenit/material-sorter-pcb
